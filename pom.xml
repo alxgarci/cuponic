@@ -54,9 +54,18 @@
           <artifactId>maven-surefire-plugin</artifactId>
           <version>2.22.1</version>
         </plugin>
+        <!-- Plugin para compilar como jar, View->Tool Windows->Maven->package->Run MavenBuild -->
         <plugin>
           <artifactId>maven-jar-plugin</artifactId>
-          <version>3.0.2</version>
+          <version>3.2.0</version>
+          <configuration>
+            <finalName>ProyInformaticaBETA</finalName>
+            <archive>
+              <manifest>
+                  <mainClass>org.example.mainMenu</mainClass>
+              </manifest>
+            </archive>
+          </configuration>
         </plugin>
         <plugin>
           <artifactId>maven-install-plugin</artifactId>

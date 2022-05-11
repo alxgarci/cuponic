@@ -37,7 +37,7 @@ public class mainMenu {
 			if (USUARIO_ACTIVO.getType().equals(TYPE_USER)) {
 				boolean continuar = true;
 				while(continuar) {
-					//TODO: probar en cmd el clear console
+					//TODO: probar en cmd el clear console, FUNCIONA EN CMD W10
 					clrscr();
 					switch (menu_trabajador()) {
 					case 1:
@@ -66,6 +66,7 @@ public class mainMenu {
 			} else if (USUARIO_ACTIVO.getType().equals(TYPE_ADMIN)) {
 				boolean continuar = true;
 				while(continuar) {
+					clrscr();
 					switch (menu_admin()) {    //Menu interactivo
 					case 1:
 						Admin.buscarPromociones();
