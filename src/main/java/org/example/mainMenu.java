@@ -1,5 +1,7 @@
 package org.example;
 
+import org.example.interfaces.Admin;
+import org.example.interfaces.User;
 import org.example.obj.Usuario;
 
 import java.io.*;
@@ -18,8 +20,7 @@ public class mainMenu {
 	private static final String DATABASES_CHARSET = "UTF-8";
 	private static final String DB_USERS = "userDatabase";
 
-	public static String LOGGED_USERNAME = "";
-	public static String LOGGED_TYPE = "";
+	public static Usuario USUARIO_ACTIVO;
 
 	public static void main(String[] args) {
 		System.out.println("Bienvenido a CUPONIC...");
@@ -28,30 +29,28 @@ public class mainMenu {
 				"  1 - Usuario de la aplicacion\n"+
 				"  2 - Administrador");
 
-		Usuario usuarioActivo = logIn(readType());
+		USUARIO_ACTIVO = logIn(readType());
 
 
 		boolean continuarOpc = true;
 		while (continuarOpc) {
-			if (usuarioActivo.getType().equals(TYPE_USER)) {
+			if (USUARIO_ACTIVO.getType().equals(TYPE_USER)) {
 				boolean continuar = true;
 				while(continuar) {
 					//TODO: probar en cmd el clear console
 					clrscr();
 					switch (menu_trabajador()) {
 					case 1:
+						User.buscarPromociones();
 						break;
 					case 2:
+						User.guardarProductos();
 						break;
 					case 3:
+						User.eliminarProductos();
 						break;
 					case 4:
-						break;
-					case 5:
-						break;
-					case 6:
-						break;
-					case 7:
+						User.verListaDeLaCompra();
 						break;
 					case 0:
 						System.out.println("[SYSTEM] Saliendo de la aplicación...");
@@ -64,23 +63,21 @@ public class mainMenu {
 					}
 				}
 
-			} else if (usuarioActivo.getType().equals(TYPE_ADMIN)) {
+			} else if (USUARIO_ACTIVO.getType().equals(TYPE_ADMIN)) {
 				boolean continuar = true;
 				while(continuar) {
 					switch (menu_admin()) {    //Menu interactivo
 					case 1:
+						Admin.buscarPromociones();
 						break;
 					case 2:
+						Admin.altaPromociones();
 						break;
 					case 3:
+						Admin.bajaPromociones();
 						break;
 					case 4:
-						break;
-					case 5:
-						break;
-					case 6:
-						break;
-					case 7:
+						Admin.consultarLog();
 						break;
 					case 0:
 						System.out.println("[SYSTEM] Saliendo de la aplicación...");
@@ -101,24 +98,29 @@ public class mainMenu {
 
 	private static String readType() {
 		boolean datoNotOk = true;
+		String returnString = "";
 		while (datoNotOk) {
 			System.out.print(">>: ");
-			if (sc.hasNextInt()) {
+			int input = sc.nextInt();
+			sc.nextLine();
+			if (input == 1) {
 				datoNotOk = false;
+				returnString = TYPE_USER;
+			} else if (input == 2){
+				datoNotOk = false;
+				returnString = TYPE_ADMIN;
+			} else {
+				System.out.println("[ERROR] Debes introducir un valor listado");
 			}
-			else {
-				sc.next(); // Vaciar la basura (no int) del teclado...
-				System.out.println("[ERROR] Introduce un numero (INT)");
-			}
+//			if (sc.hasNextInt()) {
+//				datoNotOk = false;
+//			}
+//			else {
+//				sc.next(); // Vaciar la basura (no int) del teclado...
+//				System.out.println("[ERROR] Introduce un numero (INT)");
+//			}
 		}
-		int input = sc.nextInt();
-		if (input == 1) {
-			return TYPE_USER;
-		} else if (input == 2){
-			return TYPE_ADMIN;
-		} else {
-			return "";
-		}
+		return returnString;
 	}
 
 	private static File createLocalFile(String dbName, String extension) {
@@ -312,11 +314,12 @@ public class mainMenu {
 	}
 
 	private static int readOpcion(String txt) {
-		if (txt.length() != 0) {
-			System.out.println(txt);
-		}
+
 		boolean datoNotOk = true;
 		while (datoNotOk) {
+			if (txt.length() != 0) {
+				System.out.println(txt);
+			}
 			System.out.print(">>: ");
 			if (sc.hasNextInt()) {
 				datoNotOk = false;
@@ -382,67 +385,35 @@ public class mainMenu {
 
 	//MENU DEL TRABAJADOR
 	public static int menu_trabajador(){
-		int opcion = 0;
-		Scanner teclado = new Scanner(System.in);
 
 		//Mostramos menu donde el usuario
 		printLogo();
-		System.out.print(
-				"\n" +
-						"[MENU] Menu principal TRABAJADOR\n" +
-						"  1 - Registrar cliente\n" +
-						"  2 - Alta usuario\n" +
-						"  3 - Buscar promociones\n" +
-						"  4 - guardar productos\n" +
-						"  5 - eliminar productosma\n" +
-						"  6 - Mostrar precios de usuario\n" +
-						"  7 - Crear lista de la compra\n" +
+		return readOpcion("[MENU] Menu principal TRABAJADOR\n" +
+						"  1 - Buscar promociones\n" +
+						"  2 - Guardar productos en la lista\n" +
+						"  3 - Eliminar productos de la lista\n" +
+						"  4 - Mostrar lista de la compra\n" +
 						"  0 - Salir del programa\n" +
 						"UEM" + "\n"
 
 				);
-		// recoge la opcion y asegura que se introduce un integer
-		if (teclado.hasNextInt()) {
-			opcion = teclado.nextInt();
-		}
-		else {
-			teclado.next(); // Vaciar la basura (no int) del teclado...
-		}
-		//Se devuelve el valor de 'opcion' a main()
-		return opcion;
 	}
 
 	//MENU DEL ADMINISTRADOR
-	public static int menu_admin(){   //FunciÃ³n menu interactivo
-		int opcion = 0;
-		Scanner teclado = new Scanner(System.in);
-
+	public static int menu_admin(){
 		//Mostramos menu del administrador
 		printLogo();
-		System.out.print(
-				"\n" +
-						"[MENU] Menu principal ADMINISTRADOR\n" +
-						"  1 - Registrar\n" +
-						"  2 - Alta administrador\n" +
-						"  3 - Buscar promociones\n" +
-						"  4 - dar de alta promociones\n" +
-						"  5 - Dar de baja promociones\n" +
-						"  6 - Consultar log\n" +
+
+		//Se devuelve el valor de 'opcion' a main()
+		return readOpcion("[MENU] Menu principal ADMINISTRADOR\n" +
+						"  1 - Buscar promociones\n" +
+						"  2 - Dar de alta promociones\n" +
+						"  3 - Dar de baja promociones\n" +
+						"  4 - Consultar log\n" +
 						"  0 - Salir del programa\n" +
 						"UEM" + "\n"
 
 				);
-		// recoge la opciÃ³n y asegura que se introduce un integer
-		if (teclado.hasNextInt()) {
-			opcion = teclado.nextInt();
-		}
-		else {
-			teclado.next(); // Vaciar la basura (no int) del teclado...
-		}
-
-
-		//Se devuelve el valor de 'opcion' a main()
-		return opcion;
 
 	}
 }
