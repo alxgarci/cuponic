@@ -22,8 +22,8 @@ public class mainMenu {
 	public static String LOGGED_TYPE = "";
 
 	public static void main(String[] args) {
-		System.out.println("Bienvenido a ...");
-		printLogo();
+		System.out.println("Bienvenido a CUPONIC...");
+		printMiniLogo();
 		System.out.println("[SYSTEM] Selecciona usuario\n" +
 				"  1 - Usuario de la aplicacion\n"+
 				"  2 - Administrador");
@@ -202,11 +202,9 @@ public class mainMenu {
 		}
         List<String> aux;
 
-		System.out.println(typeUser + " --- " + dbType);
         for (String string : set) {
 			if (string.contains(dbType)) {
 				aux = Arrays.asList(string.replace(DB_TYPEUSER_SEPARATOR, "").split(DB_SEPARATOR));
-				System.out.println("NEW AUX: " + aux.size());
 				for (String a :
 					 aux) {
 					System.out.println(a);
@@ -292,9 +290,6 @@ public class mainMenu {
 	private static boolean checkUserAndPass(String type, Usuario u) {
 		File f = createLocalFile(DB_USERS, "");
 		ArrayList<Usuario> usersArray = userDBRead(f, type);
-		System.out.println(usersArray.get(0).toString());
-		System.out.println(u.toString());
-		System.out.println(usersArray.contains(u));
 		return usersArray.contains(u);
 	}
 
@@ -351,19 +346,38 @@ public class mainMenu {
 
 	private static void printLogo() {
 		System.out.println(
-    "          ▄████▄														   \n"+
-    "        ██████████\n"+
-    "      ██████████████         █████  ██  ██ ██████  █████  ██  ██ ██  █████\n"+
-    "    █████        █████▄      ██  ██ ██  ██ ██  ██ ██   ██ ███ ██ ██ ██▌ ██\n"+
-    "  █████    ████ ▄███████     ██     ██  ██ ██████ ██   ██ ██████ ██ ██▌   \n"+
-    " █████   ██████████  ████    ██     ██  ██ ██▀    ██   ██ ██ ███ ██ ██▌  \n"+
-    " █████    █████████▄▄████    ██  ██ ██▄▄██ ██     ██   ██ ██ ███ ██ ██▌ ██\n"+
-    "  █████    ████ ▀███████▀    █████   ████  ██      █████  ██  ██ ██  █████ \n"+
-    "    █████        █████ \n"+
-    "      ██████████████\n"+
-    "        ▐█████████\n"+
-    "           ▀███▀ \n"
-);
+	"<<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>>\n" +
+    "           ▄████▄													\n"+
+    "         ██████████\n"+
+    "       ██████████████         █████  ██  ██ ██████  █████  ██  ██ ██  █████\n"+
+    "     █████        █████▄      ██  ██ ██  ██ ██  ██ ██   ██ ███ ██ ██ ██▌ ██\n"+
+    "   █████    ████ ▄███████     ██     ██  ██ ██████ ██   ██ ██████ ██ ██▌   \n"+
+    "  █████   ██████████  ████    ██     ██  ██ ██▀    ██   ██ ██ ███ ██ ██▌  \n"+
+    "  █████    █████████▄▄████    ██  ██ ██▄▄██ ██     ██   ██ ██ ███ ██ ██▌ ██\n"+
+    "   █████    ████ ▀███████▀    █████   ████  ██      █████  ██  ██ ██  █████ \n"+
+    "     █████        █████ \n"+
+    "       ██████████████         Un proyecto de Daniel, Alejandro, Adrián y\n"+
+    "         ▐█████████           Mohamed para la UEM [2022]\n"+
+    "            ▀███▀ \n" +
+	"<<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>>\n"
+		);
+	}
+
+	private static void printMiniLogo() {
+		System.out.println(
+    "           ▄████▄	         \n"+
+    "         ██████████         \n"+
+    "       ██████████████       \n"+
+    "     █████        █████▄    \n"+
+    "   █████    ████ ▄███████   \n"+
+    "  █████   ██████████  ████  \n"+
+    "  █████    █████████▄▄████  \n"+
+    "   █████    ████ ▀███████▀  \n"+
+    "     █████        █████     \n"+
+    "       ██████████████       \n"+
+    "         ▐█████████         \n"+
+    "            ▀███▀           \n"
+		);
 	}
 
 	//MENU DEL TRABAJADOR
