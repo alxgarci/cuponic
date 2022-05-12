@@ -124,7 +124,7 @@ public class mainMenu {
 		return returnString;
 	}
 
-	private static File createLocalFile(String dbName, String extension) {
+	public static File createLocalFile(String dbName, String extension) {
         String dbFormed;
         if (extension.equals("")) {
             dbFormed = dbName + ".db";
@@ -296,7 +296,7 @@ public class mainMenu {
 		return usersArray.contains(u);
 	}
 
-	private static String readString(String txt) {
+	public static String readString(String txt) {
 		String returnTxt = "";
 		if (txt.length() != 0) {
 			System.out.println(txt);
@@ -308,7 +308,7 @@ public class mainMenu {
 			if (returnTxt.length() != 0) {
 				datoNotOk = false;
 			} else {
-				System.out.println("[ERROR] Introduce un usuario valido");
+				System.out.println("[ERROR] Introduce un texto valido");
 			}
 		}
 		return returnTxt;
@@ -336,15 +336,15 @@ public class mainMenu {
 	}
 
 	public static void clrscr(){
-    //Limpiar pantalla en java
-    try {
-        if (System.getProperty("os.name").contains("Windows"))
-            new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
-        else
-            Runtime.getRuntime().exec("clear");
-    } catch (InterruptedException | IOException ex) {
-		ex.printStackTrace();
-	}
+		//Limpiar pantalla en java
+		try {
+			if (System.getProperty("os.name").contains("Windows"))
+				new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+			else
+				Runtime.getRuntime().exec("clear");
+		} catch (InterruptedException | IOException ex) {
+			ex.printStackTrace();
+		}
 
 	}
 
@@ -354,10 +354,10 @@ public class mainMenu {
     "           ▄████▄													\n"+
     "         ██████████\n"+
     "       ██████████████         █████  ██  ██ ██████  █████  ██  ██ ██  █████\n"+
-    "     █████        █████▄      ██  ██ ██  ██ ██  ██ ██   ██ ███ ██ ██ ██▌ ██\n"+
-    "   █████    ████ ▄███████     ██     ██  ██ ██████ ██   ██ ██████ ██ ██▌   \n"+
-    "  █████   ██████████  ████    ██     ██  ██ ██▀    ██   ██ ██ ███ ██ ██▌  \n"+
-    "  █████    █████████▄▄████    ██  ██ ██▄▄██ ██     ██   ██ ██ ███ ██ ██▌ ██\n"+
+    "     █████        █████▄      ██  ██ ██  ██ ██  ██ ██   ██ ███ ██ ██ ██  ██\n"+
+    "   █████    ████ ▄███████     ██     ██  ██ ██████ ██   ██ ██████ ██ ██    \n"+
+    "  █████   ██████████  ████    ██     ██  ██ ██▀    ██   ██ ██ ███ ██ ██   \n"+
+    "  █████    █████████▄▄████    ██  ██ ██▄▄██ ██     ██   ██ ██ ███ ██ ██  ██\n"+
     "   █████    ████ ▀███████▀    █████   ████  ██      █████  ██  ██ ██  █████ \n"+
     "     █████        █████ \n"+
     "       ██████████████         Un proyecto de Daniel, Alejandro, Adrián y\n"+
@@ -396,7 +396,6 @@ public class mainMenu {
 						"  4 - Mostrar lista de la compra\n" +
 						"  0 - Salir del programa\n" +
 						"UEM" + "\n"
-
 				);
 	}
 
@@ -413,7 +412,6 @@ public class mainMenu {
 						"  4 - Consultar log\n" +
 						"  0 - Salir del programa\n" +
 						"UEM" + "\n"
-
 				);
 
 	}
