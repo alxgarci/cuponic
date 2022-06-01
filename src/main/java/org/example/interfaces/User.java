@@ -2,7 +2,9 @@ package org.example.interfaces;
 
 import com.google.zxing.WriterException;
 import io.github.shashankn.qrterminal.QRCode;
+import org.example.App;
 import org.example.mainMenu;
+import org.example.obj.ItemListaCompra;
 import org.example.obj.Product;
 import org.example.obj.Promo;
 import org.example.tools.WriteToLog;
@@ -15,7 +17,7 @@ import java.util.*;
 
 public class User {
 
-    private static ArrayList<Product> products;
+    private static ArrayList<ItemListaCompra> listaCompras = new ArrayList<>();
 
     public static void buscarPromociones() {
         String query = mainMenu.readString("[I] Introduce tu busqueda");
@@ -35,30 +37,51 @@ public class User {
 
     public static void guardarProductos() {
         String input = "";
+
         while (!input.toUpperCase().equals("S")) {
-            //TODO: CREAR PRODUCTOS
+            String nombre = mainMenu.readString("[I] Introduce nombre del producto");
+            String cantidad = mainMenu.readString("[I] Introduce una cantidad");
+            listaCompras.add(new ItemListaCompra(nombre, cantidad));
+            input = mainMenu.readString("[SYS] ¿Continuar o salir? (C/S)");
         }
 
     }
 
     public static void eliminarProductos() {
+        String nombre = mainMenu.readString("[I] Introduce nombre del producto a eliminar");
+        for (ItemListaCompra i: listaCompras) {
+            if (i.getNombre().equals(nombre)) {
+                listaCompras.remove(i);
+                System.out.println("[SYS] Producto " + i.getNombre() + " eliminado correctamente");
+            }
+        }
 
     }
 
     public static void verListaDeLaCompra() {
-        //TODO CHECK PRODUCTOS CON PRECIOS EN SUPERMERCADOS
+        if (listaCompras.size() > 0) {
+            ArrayList<ItemListaCompra> arrayList = App.getPreciosListaCompra(listaCompras);
+            for (ItemListaCompra i: arrayList) {
+                System.out.println(i.toString());
+            }
+        } else {
+            System.out.println("[ERROR] Sin elementos en la lista de la compra");
+        }
+
+
     }
 
     private static void qrPrinter(String code) {
         try {
-            QRCode.from(code).generateHalfBlock();
+            System.out.println(QRCode.from(code).generateHalfBlock());
+            System.out.println(code);
         } catch (WriterException e) {
             e.printStackTrace();
             WriteToLog.writeLogFile("[ERROR] Creando QR con codigo " + code);
         }
     }
 
-    private static ArrayList<Promo> getPromosMatching(File dbPromos, String promo) {
+    public static ArrayList<Promo> getPromosMatching(File dbPromos, String promo) {
         ArrayList<Promo> promosArray = new ArrayList<>();
         Set<String> set = new HashSet<>();
         try {

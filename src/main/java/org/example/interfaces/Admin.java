@@ -5,6 +5,7 @@ import org.example.obj.Promo;
 import org.example.tools.WriteToLog;
 
 import java.io.*;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Scanner;
 import java.util.Set;
@@ -17,6 +18,13 @@ public class Admin {
     public static final String PROMO_TYPE_CODE = "CODE";
 
     public static void buscarPromociones() {
+
+        String query = mainMenu.readString("[I] Introduce tu busqueda");
+        ArrayList<Promo> promos = User.getPromosMatching(mainMenu.createLocalFile("promo_database","csv"), query);
+        System.out.println("[SYS] Imprimiendo promociones encontradas");
+        for (Promo p : promos) {
+            System.out.println(" " + p.toStringAdmin());
+        }
 
     }
     public static void altaPromociones() {
@@ -79,9 +87,11 @@ public class Admin {
                         continue;
                     set.add(line);
                 }
+                reader.close();
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
+
 
             FileOutputStream fos = new FileOutputStream(dbCsv, true);
             OutputStreamWriter osw = new OutputStreamWriter(fos, PROMO_DATABASE_CHARSET);
@@ -93,6 +103,7 @@ public class Admin {
 				pw.write("\n");
 			}
             pw.close();
+            bw.close();
             WriteToLog.writeLogFile("[SYSTEM] Promocion '" + promo.getPromoCode() + "' registrada correctamente");
 			System.out.println("[SYSTEM] Promocion para '" + promo.getSupermercado() + "' registrada correctamente");
 

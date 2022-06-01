@@ -37,6 +37,11 @@ public class Promo {
     @Override
     public String toString() {
         return "[PROMO] Supermercado: '" + supermercado + '\'' +
+                ", Descuento: '" + descuento + '\'' + " // Codigo: " + promoCode;
+    }
+
+    public String toStringAdmin() {
+        return "[PROMO](" + type + ") Supermercado: '" + supermercado + '\'' +
                 ", Descuento: '" + descuento + '\'';
     }
 

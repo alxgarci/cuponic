@@ -1,5 +1,6 @@
 package org.example;
 
+import org.example.obj.ItemListaCompra;
 import org.example.obj.Prices;
 import org.example.obj.Product;
 import org.jsoup.Jsoup;
@@ -12,19 +13,16 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class App
 {
 
     private static File input;
-    private static Scanner sc;
 
     private static final String URL_SEARCH_BASE = "https://soysuper.com/search?q=";
     private static final String URL_PRODUCT_BASE = "https://soysuper.com";
 
     public static void main( String[] args ) throws IOException {
-        sc = new Scanner(System.in);
 
         //Leemos por consola el elemento a buscar (para pruebas)
 //        System.out.print("BUSCAR: ");
@@ -45,12 +43,19 @@ public class App
 //        printProductConsole(p);
     }
 
-    private static void printProductConsole(Product p) {
-        System.out.println(p.toString());
-        for (Prices pr :
-                p.getPricesArrayList()) {
-            System.out.println(pr.toString());
+    public static ArrayList<ItemListaCompra> getPreciosListaCompra(ArrayList<ItemListaCompra> arrayList) {
+        ArrayList<ItemListaCompra> aux = new ArrayList<>();
+        for (ItemListaCompra i: arrayList) {
+            try {
+                String href = getHrefItem(i.getNombre());
+                Product p = getProductAndPrices(href);
+                String precio = String.valueOf(p.getPricesArrayList().get(0).getPrecio());
+                aux.add(new ItemListaCompra(i.getNombre(), i.getCantidad(), p.getPricesArrayList().get(0).getSupermercado(), precio, p.getItemDescription()));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
+        return aux;
     }
 
     private static Product getProductAndPrices(String href) throws IOException {
@@ -108,7 +113,7 @@ public class App
         Elements products = doc.select("a[href^=/p/]");
         Element p = products.get(0);
         String pLink = p.attr("href");
-        System.out.println("[S] 1ST ITEM href " + pLink);
+//        System.out.println("[S] 1ST ITEM href " + pLink);
         return pLink;
     }
 
@@ -125,19 +130,19 @@ public class App
 
     private static Document getDoc(String query) throws IOException {
         String url = parseUrlQuery(query);
-        System.out.println("[S] FETCHING QUERY DOC " + url);
+//        System.out.println("[S] FETCHING QUERY DOC " + url);
         return Jsoup.connect(url).get();
     }
 
     private static Document getPricesDoc(String query) throws IOException {
         String url = URL_PRODUCT_BASE + query;
-        System.out.println("[S] FETCHING PRODUCT DOC " + url);
+//        System.out.println("[S] FETCHING PRODUCT DOC " + url);
         return Jsoup.connect(url).get();
     }
 
     private static String parseUrlQuery(String query) {
-        //Método para pasar la query en un formato de enlace determinado,
-        //transformándolo a UTF-8 para URL
+        //Metodo para pasar la query en un formato de enlace determinado,
+        //transformandolo a UTF-8 para URL
         String qRev = "";
         try {
             qRev = URLEncoder.encode(query, "UTF-8");
