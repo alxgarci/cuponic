@@ -1,5 +1,8 @@
 package org.example.interfaces;
 
+import org.eclipse.jgit.api.Git;
+import org.eclipse.jgit.lib.*;
+import org.eclipse.jgit.storage.file.FileRepositoryBuilder;
 import org.example.mainMenu;
 import org.example.obj.Promo;
 
