@@ -22,18 +22,22 @@ public class Promo {
 
     }
 
+    public String getType(){
+        return type;
+    }
+
+    public String getPromoCode(){
+        return promoCode;
+    }
+
     public String getSupermercado() {
         return supermercado;
     }
 
     @Override
     public String toString() {
-        return "Promo{" +
-                "type='" + type + '\'' +
-                ", supermercado='" + supermercado + '\'' +
-                ", promoCode='" + promoCode + '\'' +
-                ", descuento='" + descuento + '\'' +
-                '}';
+        return "[PROMO] Supermercado: '" + supermercado + '\'' +
+                ", Descuento: '" + descuento + '\'';
     }
 
     public String toStringDBStore() {
