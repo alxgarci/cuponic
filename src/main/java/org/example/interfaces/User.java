@@ -73,7 +73,7 @@ public class User {
 
     private static void qrPrinter(String code) {
         try {
-            System.out.println(QRCode.from(code).generateHalfBlock());
+            System.out.println(QRCode.from(code).generate());
             System.out.println(code);
         } catch (WriterException e) {
             e.printStackTrace();
