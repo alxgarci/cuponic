@@ -1,12 +1,12 @@
 package org.example.interfaces;
 
 import com.google.zxing.WriterException;
-import io.github.shashankn.qrterminal.QRCode;
 import org.example.App;
 import org.example.mainMenu;
 import org.example.obj.ItemListaCompra;
 import org.example.obj.Product;
 import org.example.obj.Promo;
+import org.example.tools.QRPrinter;
 import org.example.tools.WriteToLog;
 
 import java.io.BufferedReader;
@@ -32,6 +32,7 @@ public class User {
                 System.out.println(" [SYS] Codigo de promocion: " + p.getPromoCode());
             }
         }
+        Admin.enterContinuar();
 
     }
 
@@ -67,18 +68,12 @@ public class User {
         } else {
             System.out.println("[ERROR] Sin elementos en la lista de la compra");
         }
-
+    Admin.enterContinuar();
 
     }
 
     private static void qrPrinter(String code) {
-        try {
-            System.out.println(QRCode.from(code).generate());
-            System.out.println(code);
-        } catch (WriterException e) {
-            e.printStackTrace();
-            WriteToLog.writeLogFile("[ERROR] Creando QR con codigo " + code);
-        }
+        System.out.println(QRPrinter.getQr(code));
     }
 
     public static ArrayList<Promo> getPromosMatching(File dbPromos, String promo) {
@@ -100,10 +95,6 @@ public class User {
         for (String string : set) {
 			if (string.contains(promo)) {
 				aux = Arrays.asList(string.split(Admin.PROMO_DATABASE_SEPARATOR));
-				for (String a :
-					 aux) {
-					System.out.println(a);
-				}
 				promosArray.add(new Promo(aux.get(0), aux.get(1), aux.get(2), aux.get(3), aux.get(4)));
 			}
         }

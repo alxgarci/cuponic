@@ -25,6 +25,7 @@ public class Admin {
         for (Promo p : promos) {
             System.out.println(" " + p.toStringAdmin());
         }
+        enterContinuar();
 
     }
     public static void altaPromociones() {
@@ -66,10 +67,14 @@ public class Admin {
         } catch (IOException e) {
             e.printStackTrace();
         }
+       enterContinuar();
+
+    }
+
+    public static void enterContinuar(){
         System.out.println("[SYSTEM] Pulsa ENTER para continuar");
         Scanner sc = new Scanner(System.in);
         sc.nextLine();
-
     }
 
     private static void promoDBWrite(File dbCsv, Promo promo) {

@@ -7,6 +7,7 @@
   <groupId>org.example</groupId>
   <artifactId>ProyInformaticaBETA</artifactId>
   <version>1.0-SNAPSHOT</version>
+  <packaging>jar</packaging>
 
   <name>ProyInformaticaBETA</name>
   <!-- FIXME change it to the project's website -->
@@ -23,7 +24,6 @@
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
       <version>4.11</version>
-      <scope>test</scope>
     </dependency>
     <dependency>
       <!-- jsoup HTML parser library @ https://jsoup.org/ -->
@@ -32,15 +32,10 @@
       <version>1.14.3</version>
     </dependency>
     <dependency>
-      <groupId>io.github.shashankn</groupId>
-      <artifactId>qr-terminal</artifactId>
-      <version>1.0.0</version>
+      <groupId>com.google.zxing</groupId>
+      <artifactId>core</artifactId>
+      <version>3.3.0</version>
     </dependency>
-    <dependency>
-      <groupId>org.eclipse.jgit</groupId>
-      <artifactId>org.eclipse.jgit</artifactId>
-      <version>3.5.0.201409260305-r</version>
-  </dependency>
   </dependencies>
 
   <build>
@@ -65,6 +60,33 @@
           <version>2.22.1</version>
         </plugin>
         <!-- Plugin para compilar como jar, View->Tool Windows->Maven->package->Run MavenBuild -->
+
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-assembly-plugin</artifactId>
+          <version>3.3.0</version>
+          <configuration>
+                    <archive>
+                        <manifest>
+                            <mainClass>org.example.mainMenu</mainClass>
+                        </manifest>
+                    </archive>
+                    <descriptorRefs>
+                        <descriptorRef>jar-with-dependencies</descriptorRef>
+                    </descriptorRefs>
+          </configuration>
+          <executions>
+            <execution>
+                <id>make-assembly</id>
+                <phase>package</phase>
+                <goals>
+                    <goal>single</goal>
+                </goals>
+            </execution>
+        </executions>
+
+        </plugin>
+
         <plugin>
           <artifactId>maven-jar-plugin</artifactId>
           <version>3.2.0</version>
@@ -72,6 +94,7 @@
             <finalName>ProyInformaticaBETA</finalName>
             <archive>
               <manifest>
+                  <addClasspath>true</addClasspath>
                   <mainClass>org.example.mainMenu</mainClass>
               </manifest>
             </archive>
@@ -94,6 +117,7 @@
           <artifactId>maven-project-info-reports-plugin</artifactId>
           <version>3.0.0</version>
         </plugin>
+
       </plugins>
     </pluginManagement>
   </build>
