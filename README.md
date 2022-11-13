@@ -1,5 +1,9 @@
 # Proyecto CUPONIC - Proyecto de Ingeniería 2021
-## 1º Ingeniería Informática
+### 1º Ingeniería Informática
+
+<p align="center">
+  <img src="https://github.com/alxgarci/cuponic/blob/master/imgs/logo.png?raw=true" alt="cuponic logo" width="500"/>
+</p>
 
 <!-- MarkdownTOC -->
 
