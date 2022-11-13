@@ -57,7 +57,7 @@ En la aplicación se puede elegir la forma de ingresar (como usuario o como admi
 ## Participantes
 | Nombre           | Tarea                 |
 | ---------------- |-----------------------|
-| Alejandro GARCÍA | Todo el código        |
+| Alejandro GARCÍA | Código                |
 | Mohamed Oussama  | Documentación / Ideas |
 | Adrián GARCÍA    | Presentaciones        |
 | Daniel GUTIÉRREZ | Documentación	       |
