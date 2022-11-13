@@ -18,14 +18,14 @@
 <!-- /MarkdownTOC -->
 
 
-### Descripción
+## Descripción
 
 *Comparador de precios en tiempo real, crea tu lista de la compra y te dice en qué supermercado te sale más barato comprarlo. Contiene una base de datos de cupones actualizable por un administrador y muestra códigos QR*
 
 
-### Interfaz
+## Interfaz
 
-#### Usuarios
+### Usuarios
 
 ![Usuarios](/imgs/06.png)
 
@@ -34,7 +34,7 @@ En la aplicación se puede elegir la forma de ingresar (como usuario o como admi
 - Podremos registrarnos dentro de la aplicación en el caso de no tener un usuario ya dado de alta y crear una contraseña
 
 
-#### Menú de usuario
+### Menú de usuario
 
 ![Menu Usuario](/imgs/03.png)
 
@@ -44,7 +44,7 @@ En la aplicación se puede elegir la forma de ingresar (como usuario o como admi
 - **Mostrar lista de compra**: lista todos los elementos de añadidos a la lista por el usuario y el supermercado donde se encuentra más barato.
 
 
-#### Menú del administrador
+### Menú del administrador
 
 ![Menu Administrador](/imgs/03.png)
 
@@ -54,7 +54,7 @@ En la aplicación se puede elegir la forma de ingresar (como usuario o como admi
 - **Consultar Log**: muestra los eventos mas importantes que se han dado en la aplicación, por ejemplo todos los elementos añadidos a la lista de promociones por el administrador.
 
 
-### Participantes
+## Participantes
 | Nombre           | Tarea                 |
 | ---------------- |-----------------------|
 | Alejandro GARCÍA | Todo el código        |
@@ -63,7 +63,7 @@ En la aplicación se puede elegir la forma de ingresar (como usuario o como admi
 | Daniel GUTIÉRREZ | Documentación	       |
 
 
-### Librerías usadas
+## Librerías usadas
 - [Zxing](https://mvnrepository.com/artifact/com.google.zxing) de Google: *impresión de códigos QR*
 - [Jsoup](https://mvnrepository.com/artifact/org.jsoup/jsoup) de Jsoup: *obtención de datos de las páginas web*
 - [Maven](https://maven.apache.org/) de Apache: *recursos del proyecto, construcción del .jar*
